@@ -41,7 +41,7 @@ namespace MVC5Course.Controllers
             {
                 Result = Result.OrderByDescending(s => s.ProductName);
             }
-
+           
             //model.getIndex(p, show_number)
             return View(Result.Take(30));
         }
