@@ -1,51 +1,108 @@
 ﻿@model IEnumerable<MVC5Course.Models.Product>
 
 @{
+    var total = 0;
     ViewBag.Title = "Index";
+    if (IsPost) {
+        var num = Request["text1"];
+        var num2 = Request["text2"];
+
+        total = num.AsInt() + num2.AsInt();
+    }
+}
+@{
+    var cacheItemKey = "CachedTime";
+    var cacheHit = true;
+    var time = WebCache.Get(cacheItemKey);
+
+    if (time == null)
+    {
+        cacheHit = false;
+    }
+
+    if (cacheHit == false)
+    {
+        time = @DateTime.Now;
+        WebCache.Set(cacheItemKey, time, 1, false);
+    }
 }
 
 <h2>Index</h2>
+<form action="" method="post">
+    <p>
+        <label for="text1">First Number:</label>
+        <input type="text" name="text1" />
+        <label for="text2">Second Number:</label>
+        <input type="text" name="text2" />
+    <p><input type="submit" value="Add" /></p>
+ </form>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ProductName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Active)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Stock)
-        </th>
-        <th></th>
-    </tr>
+    <p>Total: @total</p>
+    </p>
+    <p>
+        @using (Html.BeginForm("Index", "Products", FormMethod.Get))
+        {
+        <p>
+            Keyword: @Html.TextBox("keyword")
+            <input type="submit" value="Filter" />
+        </p>
+        }
+        </p>
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    @*@Html.DisplayNameFor(model => model.ProductName)*@
+                    @Html.ActionLink("ProductName", "Index", new { sortOrder = ViewBag.NameSortParm })
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Active)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Stock)
+                </th>
+                <th></th>
+            </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProductName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Active)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Stock)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ProductId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ProductId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ProductId })
-        </td>
-    </tr>
-}
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Active)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Stock)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ProductId }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ProductId }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ProductId })
+                    </td>
+                </tr>
+            }
 
-</table>
+        </table>
+<div>
+    @if (cacheHit)
+    {
+        @:Found the time data in the cache.
+        }
+    else
+    {
+        @:Did not find the time data in the cache.
+        }
+</div>
+<div>
+    This page was cached at @time.
+</div>

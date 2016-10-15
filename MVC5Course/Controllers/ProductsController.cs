@@ -15,10 +15,97 @@ namespace MVC5Course.Controllers
         private FabricsEntities db = new FabricsEntities();
 
         // GET: Products
-        public ActionResult Index()
+        //public ActionResult Index()
+        //{
+        //    return View(db.Product.ToList());
+        //}
+          public ActionResult Index(String sortOrder, string currentFilter,String keyword,int? Page)
         {
-            return View(db.Product.ToList());
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+
+            //if(keyword != null)
+            //{
+            //    Page = 1;
+            //}else
+            //{
+            //    keyword = currentFilter;
+            //}
+            //ViewBag.CurrentFilter = keyword;
+            var Result = from r in db.Product
+                         select r;
+            if (!String.IsNullOrEmpty(keyword))
+            {
+                Result = Result.Where(r => r.ProductName.Contains(keyword));
+            }
+            if (ViewBag.NameSortParm != "")
+            {
+                Result = Result.OrderByDescending(s => s.ProductName);
+            }
+
+            //model.getIndex(p, show_number)
+            return View(Result.Take(30));
         }
+        //public List<Product> Get_Page(IQueryable<Product> result,int p=1,int show_number=10)
+        //{
+        //    return Get_Page1(Get_Count(), p, show_number);
+        //}
+        //public static Paging Get_Page1(int total, int current_page = 1, int page_count = 10, int pages = 5)
+        //{
+        //    Paging page = new Paging();
+
+        //    int count = pages;
+        //    int count_com = Convert.ToInt32(Math.Ceiling((double)count / 2));
+
+        //    page.First = 1;
+        //    int last = Convert.ToInt32(Math.Ceiling((double)total / (double)page_count));
+        //    page.Last = last <= 0 ? 1 : last;
+        //    page.Total = total;
+        //    page.Now = current_page;
+
+        //    page.Back = (current_page > 1) ? current_page - 1 : current_page;
+        //    page.Next = (current_page < last) ? current_page + 1 : current_page;
+
+        //    int start = current_page - count_com;
+        //    page.Start = (start < 1) ? 1 : start;
+
+        //    int end = page.Start + count - 1;
+        //    end = (end >= last) ? last : end;
+        //    page.End = (end == 0) ? 1 : end;
+
+        //    return page;
+        //}
+        //public class Paging
+        //{
+        //    public int First = 1;
+        //    public int Last = 1;
+        //    public int Total = 1;
+        //    public int Now = 1;
+        //    public int Back = 1;
+        //    public int Next = 1;
+        //    public int Start = 1;
+        //    public int End = 1;
+        //}
+        //public int Get_Count()
+        //{
+        //    return Get().Count();
+        //}
+        //private IQueryable<Product> Get()
+        //{             
+        //    IQueryable<Product> item = db.Product;          
+        //    return item;
+        //}
+
+        //public ActionResult ProductSort(string sortOrder)
+        //{
+        //    ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+        //    var Products = from p in db.Product
+        //                   select p;
+        //    if (ViewBag.NameSortParm != "")
+        //    {
+        //        Products = Products.OrderByDescending(s => s.ProductName);
+        //    }
+        //    return View(Products.ToList());
+        //}
 
         // GET: Products/Details/5
         public ActionResult Details(int? id)

@@ -23,8 +23,10 @@ namespace MVC5Course.Models
         [Required]
         public int ProductId { get; set; }
         [Required]
+        [RegularExpression(@"^[A-Z]+[a-zA-Z''-'\s]*$")]
         public string ProductName { get; set; }
         [Required]
+        [DisplayFormat(DataFormatString ="{0:#,#}")]
         public Nullable<decimal> Price { get; set; }
         [Required]
         public Nullable<bool> Active { get; set; }
