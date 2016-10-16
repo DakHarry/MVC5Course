@@ -38,7 +38,7 @@
  </form>
 
     <p>Total: @total</p>
-    </p>
+
     <p>
         @using (Html.BeginForm("Index", "Products", FormMethod.Get))
         {
@@ -47,7 +47,7 @@
             <input type="submit" value="Filter" />
         </p>
         }
-        </p>
+
         <p>
             @Html.ActionLink("Create New", "Create")
         </p>
