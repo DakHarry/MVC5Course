@@ -30,7 +30,7 @@
 @*b@foreach (var item in Model)*@
         @for(var i=0;i<items.Length; i++)
         {
-            @Html.HiddenFor(modelItem => items[i].ProductId)
+            @Html.HiddenFor(modelItem => items[i].ProductId, new { @id = items[i].ProductId })
             <tr>
                 <td>
                     @Html.EditorFor(modelItem => items[i].ProductName)

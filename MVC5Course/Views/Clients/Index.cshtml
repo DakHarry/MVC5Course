@@ -2,6 +2,7 @@
 
     @{
         ViewBag.Title = "Index";
+        
     }
 
     <h2>Client Index</h2>
@@ -12,6 +13,7 @@
     <p>
          @Html.ActionLink("Customer Login", "Login")
     </p>
+<p> @ViewData["Temp1"]</p>
         <form action="">
             <input type="search" name="search" value="" />
             <input type="submit" value="Search" />
