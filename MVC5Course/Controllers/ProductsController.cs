@@ -10,7 +10,7 @@ using MVC5Course.Models;
 
 namespace MVC5Course.Controllers
 {
-    public class ProductsController : Controller
+    public class ProductsController : BaseController
     {
        // private FabricsEntities db = new FabricsEntities();
         ProductRepository repo = RepositoryHelper.GetProductRepository();
@@ -19,6 +19,7 @@ namespace MVC5Course.Controllers
         //{
         //    return View(db.Product.ToList());
         //}
+      //  [Route("DK/Product")]
         public ActionResult Index(String sortOrder, string currentFilter,String keyword,int? Page)
         {
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
@@ -32,11 +33,13 @@ namespace MVC5Course.Controllers
             //}
             //ViewBag.CurrentFilter = keyword;
           //  var Result = from r in db.Product
+          
             var Result = from r in repo.All()             
                          select r;
             if (!String.IsNullOrEmpty(keyword))
             {
                 Result = Result.Where(r => r.ProductName.Contains(keyword));
+
             }
             if (ViewBag.NameSortParm != "")
             {
@@ -203,8 +206,9 @@ namespace MVC5Course.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Product product = repo.Find(id);
-            //db.Product.Remove(product);
-            product.IdDeleted = true;
+            ////db.Product.Remove(product);
+            //product.IdDeleted = true;
+            repo.Delete(product);
            // db.SaveChanges();
                 repo.UnitOfWork.Commit();
             return RedirectToAction("Index");
