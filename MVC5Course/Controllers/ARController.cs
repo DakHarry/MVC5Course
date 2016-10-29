@@ -39,7 +39,7 @@ namespace MVC5Course.Controllers
         {
             ProductRepository repo = RepositoryHelper.GetProductRepository();
            
-            // db.Configuration.LazyLoadingEnabled = false;
+            // db.Configuration.LazyLoadingEnabled = false; 設定不延遲載入
             repo.UnitOfWork.LazyLoadingEnabled = false;
             var data =repo.All().Take(50);
            
