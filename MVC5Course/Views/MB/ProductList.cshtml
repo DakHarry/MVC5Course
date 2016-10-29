@@ -1,0 +1,64 @@
+﻿@model IEnumerable<MVC5Course.Models.Product>
+
+@{
+    ViewBag.Title = "ProductList";
+    var items = Model.ToArray();
+}
+
+<h2>ProductList</h2>
+@using (Html.BeginForm("BatchUpdate", "MB"))
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Active)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Stock)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdDeleted)
+            </th>
+            <th></th>
+        </tr>
+@*b@foreach (var item in Model)*@
+        @for(var i=0;i<items.Length; i++)
+        {
+            @Html.HiddenFor(modelItem => items[i].ProductId)
+            <tr>
+                <td>
+                    @Html.EditorFor(modelItem => items[i].ProductName)
+                </td>
+                <td>
+                    @Html.EditorFor(modelItem => items[i].Price)
+                </td>
+                <td>
+                    @Html.EditorFor(modelItem => items[i].Active)
+                </td>
+                <td>
+                    @Html.EditorFor(modelItem => items[i].Stock)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => items[i].IdDeleted)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = items[i].ProductId }) |
+                    @Html.ActionLink("Details", "Details", new { id = items[i].ProductId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = items[i].ProductId })
+                </td>
+            </tr>
+        }
+
+    </table>
+    <input type="submit" value="批次更新" />
+}
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
