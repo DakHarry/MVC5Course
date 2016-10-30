@@ -15,15 +15,17 @@
     </p>
 <p> @ViewData["Temp1"]</p>
         <form action="">
-            @*<input type="search" name="search" value="" />*@
-            @Html.TextBox("search")  @*Model.State優先權最高 自動ModelBinding keyword*@
-            @*@Html.TextBoxFor(model => model.FirstName,)*@
-            @Html.DropDownList("CreditRating","---請選擇信用評等---")
-            @Html.DropDownList("Gender", "---請選擇性別---")
+    @*<input type="search" name="search" value="" />*@
+    @Html.TextBox("search")  @*Model.State優先權最高 自動ModelBinding keyword*@
+    @*@Html.TextBoxFor(model => model.FirstName,)*@
+    @Html.DropDownList("CreditRating", "---請選擇信用評等---")
+    
+    @Html.DropDownList("Gender", "---請選擇性別---")
 
 
-            <input type="submit" value="Search" />
-        </form>
+
+    <input type="submit" value="Search" />
+</form>
 
     <table class="table">
         <tr>
