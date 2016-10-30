@@ -13,5 +13,26 @@ namespace MVC5Course.Controllers
         {
             return View();
         }
+        public ActionResult NewIndex()
+        {
+            return View();
+        }
+
+        public ActionResult Clalendar()
+        {
+            return View();
+        }
+        public ActionResult Messages()
+        {
+            return View();
+        }
+        public ActionResult Tasks()
+        {
+            return View();
+        }
+        public ActionResult UIFeatures()
+        {
+            return View();
+        }
     }
 }
