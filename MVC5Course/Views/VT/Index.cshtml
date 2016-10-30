@@ -1,0 +1,53 @@
+﻿@{
+    Layout = "";
+    var name = "Harry";
+    var message = "你好，我是" + name;
+    int[] num = new int[] { 1, 2, 3, 4, 5 };
+}
+@DateTime.UtcNow
+<br />
+@DateTime.Now
+<br />
+@message
+<br />
+@(name + ":" + message)
+@@
+@if (name != null)
+{
+    @:啟用
+    @name
+    <div>
+        abc
+    </div>
+}
+@using (Html.BeginForm())
+{
+    <div>
+        Name: <input type="text" name="name" /><br />
+        @if (name != null)
+        {
+            <text>123</text><hr />
+            <div>123</div><hr />
+            <abc>123</abc><hr />
+        }
+    </div>
+    @:DEBUG
+}
+<hr />
+@foreach (var item in num)
+{
+    @item
+}
+
+@foreach (var item in num)
+{
+    @(item+" ") 
+}
+
+
+<ul>
+@foreach (var item in num)
+{
+    <li>@item</li>
+}
+</ul>

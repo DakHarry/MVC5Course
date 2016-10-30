@@ -6,7 +6,7 @@ using System.Web;
 
 namespace MVC5Course.Models.ViewModels
 {
-    public class ProductBatchUpdateViewModel : IValidatableObject
+    public class ProductBatchUpdateViewModel
     {
         public int ProductId { get; set; }
         public string ProductName { get; set; }
@@ -14,17 +14,18 @@ namespace MVC5Course.Models.ViewModels
         public Nullable<bool> Active { get; set; }
         public Nullable<decimal> Stock { get; set; }
 
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            if(this.Stock < 100 && this.Price > 50)
-            {
-                yield return new ValidationResult("庫存金額有錯!", new string[] { "Price" });
-            }
-            if(Price > 200)
-            {
-                yield return new ValidationResult("金額有錯!", new string[] { "Price" });
-            }
-        }
+        //public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        //{
+        //    //沒意義不會執行
+        //    //if(this.Stock < 100 && this.Price > 50)
+        //    //{
+        //    //    yield return new ValidationResult("庫存金額有錯!", new string[] { "Price" });
+        //    //}
+        //    //if(Price > 200)
+        //    //{
+        //    //    yield return new ValidationResult("金額有錯!", new string[] { "Price" });
+        //    //}
+        //}
         
     }
 }
