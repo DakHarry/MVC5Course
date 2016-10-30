@@ -2,12 +2,14 @@
 using MVC5Course.Models.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
 namespace MVC5Course.Controllers
 {
+    [HandleError(ExceptionType =typeof(DbEntityValidationException),View = "Error_DbEntityValidationException")]
     public class MBController : Controller
     {
         FabricsEntities db = new FabricsEntities();
@@ -59,6 +61,7 @@ namespace MVC5Course.Controllers
         }
 
         [HttpPost]
+
         public ActionResult BatchUpdate(ProductBatchUpdateViewModel[] items)
         {
             /*
@@ -66,7 +69,7 @@ namespace MVC5Course.Controllers
              * item[0].ProductId
              * 
              * */
-            if (ModelState.IsValid)
+            //if (ModelState.IsValid)
             {
                 foreach (var item in items)
                 {
@@ -80,6 +83,12 @@ namespace MVC5Course.Controllers
                 return RedirectToAction("ProductList");
             }
 
+            return View();
+        }
+
+        public ActionResult MyError()
+        {
+            throw new InvalidOperationException("顯示自訂錯誤畫面");
             return View();
         }
     }

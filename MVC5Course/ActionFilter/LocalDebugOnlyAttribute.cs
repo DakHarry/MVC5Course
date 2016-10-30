@@ -9,6 +9,7 @@ namespace MVC5Course.Controllers
         {
             if (!filterContext.HttpContext.Request.IsLocal)
             {
+                
                 filterContext.Result = new RedirectResult("/");
             }
         }
