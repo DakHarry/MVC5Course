@@ -18,14 +18,27 @@ namespace MVC5Course.Controllers
 
         // GET: Clients
         [Share頁面上常用的ViewBag變數資料]
-        public ActionResult Index(string search)
+        public ActionResult Index(string search,int? CreditRating,string Gender)
         {
             var client = db.Client.Include(c => c.Occupation);
             
             if (!String.IsNullOrEmpty(search)) {
                 client = db.Client.Where(o => o.FirstName.Contains(search));
             }
+            if(CreditRating!= null)
+            {
+                client = client.Where(o => o.CreditRating == CreditRating);
+            }
+            if (!String.IsNullOrEmpty(Gender))
+            {
+                client = client.Where(o => o.Gender.Equals(Gender));
+            }
             client = client.OrderByDescending(o => o.ClientId).Take(30);
+            var options = (from p in db.Client
+                           select
+       p.CreditRating).Distinct().OrderBy(p => p).ToList();
+            ViewBag.CreditRating = new SelectList(options);
+            ViewBag.Gender = new SelectList(new string[] { "M", "F" });
             return View(client);
         }
 
