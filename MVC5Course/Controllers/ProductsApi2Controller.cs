@@ -20,10 +20,23 @@ namespace MVC5Course.Controllers
         {
             db.Configuration.LazyLoadingEnabled = false;
         }
+      
         // GET: api/ProductsApi2
         public IQueryable<Product> GetProduct()
         {
             return db.Product;
+        }
+        //屬性路由
+        [Route("prods/{id}/orderlines")]
+        public IHttpActionResult GetProductOrderLine(int id)
+        {
+            Product product = db.Product.Find(id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+            db.Configuration.LazyLoadingEnabled = false;
+            return Ok(db.OrderLine.Where(p => p.ProductId == id).ToList());
         }
 
         // GET: api/ProductsApi2/5
