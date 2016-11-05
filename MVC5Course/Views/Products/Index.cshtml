@@ -10,6 +10,9 @@
         total = num.AsInt() + num2.AsInt();
     }
 }
+@section Scripts{
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+}
 @{
     var cacheItemKey = "CachedTime";
     var cacheHit = true;
@@ -92,14 +95,17 @@
                     </td>
                     <td>
                         @Html.ActionLink("Edit", "Edit", new { id = item.ProductId }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.ProductId }) |
+                        @*@Html.ActionLink("Details", "Details", new { id = item.ProductId }) |*@
+                        @Ajax.ActionLink("Details", "Details", new { id = item.ProductId }, new AjaxOptions() { UpdateTargetId = "details" })|
                         @Html.ActionLink("Delete", "Delete", new { id = item.ProductId })
                     </td>
                 </tr>
             }
 
         </table>
+
 <div>
+    <div id="details"></div>
     @if (cacheHit)
     {
         @:Found the time data in the cache.

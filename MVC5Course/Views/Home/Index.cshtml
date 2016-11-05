@@ -3,11 +3,30 @@
 }
 
 <div class="jumbotron">
-    <h1>ASP.NET</h1>
+    <h1>
+        <button class="btn">GetTime</button>
+        @Ajax.ActionLink("GetTime", "GetTime", new
+       AjaxOptions()
+   { UpdateTargetId = "getTime", Confirm = "ShowTime?" })
+        @Ajax.ActionLink("Delete", "GetTime", new { controller = "Home", id = 3 }, new
+       AjaxOptions()
+   {
+       OnSuccess = "OnClick",
+       Confirm = "ShowDelete?",
+       HttpMethod="POST"
+   })
+        <div id="getTime"></div>
+    </h1>
     <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
     <p>Learn more &raquo;</p>
 </div>
-
+<script>
+    function OnClick(data) {
+        if ($(this).hasClass('foo')) {
+            alert(data);
+        }
+    }
+</script>
 <div class="row">
     <div class="col-md-4">
         <h2>Getting started</h2>
@@ -29,3 +48,8 @@
         <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
     </div>
 </div>
+<div id="details">  </div>
+@*Drag ajax.js to use it.*@
+@section Scripts{
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+}
