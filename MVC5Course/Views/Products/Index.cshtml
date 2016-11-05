@@ -15,7 +15,21 @@
 
     }
 }
+
+
 @section Scripts{
+@{
+    //來自Server的字串斷行無法被解析 alert('XSS')方式擷取資料alert('XSS');//
+    ViewBag.Msg = @"you are
+     alert('XSS');//   bitch.";
+}
+<script>
+    //var str = ViewBag.Msg;
+    //加上EnCode可以防止被攻擊
+    var str = '@Ajax.JavaScriptStringEncode(ViewBag.Msg)';
+    //alert(str);
+    console.log(str);
+</script>
 <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 }
 @{
@@ -130,3 +144,4 @@
 <div>
     This page was cached at @time.
 </div>
+
