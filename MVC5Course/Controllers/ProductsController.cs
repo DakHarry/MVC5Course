@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MVC5Course.Models;
+using PagedList;
 
 namespace MVC5Course.Controllers
 {
@@ -20,7 +21,7 @@ namespace MVC5Course.Controllers
         //    return View(db.Product.ToList());
         //}
       //  [Route("DK/Product")]
-        public ActionResult Index(String sortOrder, string currentFilter,String keyword,int? Page)
+        public ActionResult Index(String sortOrder, string currentFilter,String keyword,int? Page , int PageNo = 1)
         {
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
            
@@ -45,9 +46,10 @@ namespace MVC5Course.Controllers
             {
                 Result = Result.OrderByDescending(s => s.ProductName);
             }
-           
+            var data = repo.All().OrderBy(p => p.ProductId).AsQueryable();
+
             //model.getIndex(p, show_number)
-            return View(Result.Take(30));
+            return View(data.ToPagedList(PageNo, 10));
         }
         //public List<Product> Get_Page(IQueryable<Product> result,int p=1,int show_number=10)
         //{

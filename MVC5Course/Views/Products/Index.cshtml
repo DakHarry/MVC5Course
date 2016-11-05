@@ -1,6 +1,10 @@
 ﻿@model IEnumerable<MVC5Course.Models.Product>
 
 @{
+    if (IsAjax)
+    {
+        Layout = "";
+    }
     var total = 0;
     ViewBag.Title = "Index";
     if (IsPost) {
@@ -8,6 +12,7 @@
         var num2 = Request["text2"];
 
         total = num.AsInt() + num2.AsInt();
+
     }
 }
 @section Scripts{
@@ -103,6 +108,13 @@
             }
 
         </table>
+        
+  @using PagedList
+@using PagedList.Mvc
+@*@Html.PagedListPager(Model as IPagedList, (p) => Url.Action("Index",new { PageNo = p}))*@
+@Html.PagedListPager(list: Model as IPagedList,
+    generatePageUrl: PageNo => Url.RouteUrl(new { PageNo = PageNo }),
+    options: PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing("#Main"))
 
 <div>
     <div id="details"></div>
