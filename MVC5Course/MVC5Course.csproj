@@ -216,6 +216,8 @@
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="ActionFilter\Share頁面上常用的ViewBag變數資料Attribute.cs" />
     <Compile Include="Controllers\ProductsT1Controller.cs" />
+    <Compile Include="Controllers\ProductsT4Test2Controller.cs" />
+    <Compile Include="Controllers\ProductsT4TestController.cs" />
     <Compile Include="Controllers\VTController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -385,6 +387,7 @@
     </Content>
     <Content Include="CodeTemplates\MvcControllerWithContext\Controller.cs.t4" />
     <Content Include="CodeTemplates\MvcControllerWithContext\Controller.vb.t4" />
+    <Content Include="CodeTemplates\MvcView\List.cs.t4" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -489,6 +492,16 @@
     <Content Include="Views\ProductsT1\Details.cshtml" />
     <Content Include="Views\ProductsT1\Edit.cshtml" />
     <Content Include="Views\ProductsT1\Index.cshtml" />
+    <Content Include="Views\ProductsT4Test\Create.cshtml" />
+    <Content Include="Views\ProductsT4Test\Delete.cshtml" />
+    <Content Include="Views\ProductsT4Test\Details.cshtml" />
+    <Content Include="Views\ProductsT4Test\Edit.cshtml" />
+    <Content Include="Views\ProductsT4Test\Index.cshtml" />
+    <Content Include="Views\ProductsT4Test2\Create.cshtml" />
+    <Content Include="Views\ProductsT4Test2\Delete.cshtml" />
+    <Content Include="Views\ProductsT4Test2\Details.cshtml" />
+    <Content Include="Views\ProductsT4Test2\Edit.cshtml" />
+    <Content Include="Views\ProductsT4Test2\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -511,7 +524,6 @@
     <Folder Include="CodeTemplates\MvcFullDependencyCodeGenerator\" />
     <Folder Include="CodeTemplates\MvcMinimalDependencyCodeGenerator\" />
     <Folder Include="CodeTemplates\MvcViewWithoutModel\" />
-    <Folder Include="CodeTemplates\MvcView\" />
     <Folder Include="CodeTemplates\ODataControllerWithActions\" />
     <Folder Include="CodeTemplates\ODataControllerWithContext\" />
     <Folder Include="css\" />
